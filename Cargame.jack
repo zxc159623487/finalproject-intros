@@ -1,71 +1,66 @@
-class Car{
-	field int x;
-	field int y;
-	field int l;
-	field int h;
-	constructor Car new(int a, int b, int length, int height)
-	{
-		let x = a;
-		let y = b;
-		let l = length;
-		let h = height;
-		do drawcar();
-		return this;
-	}
-	method void dispose(){
-		do Memory.deAlloc(this);
-		return;
-	}
-	method void drawcar()
-	{
-		do Screen.setColor(true);
-		do Screen.drawRectangle(x, y, x+l, y+h);
-		return;
-	}
-	method void erasecar()
-	{
-		do Screen.setColor(false);
-		do Screen.drawRectangle(x, y, x+l, y+h);
-		return;
-	}
-	method void move1left(){
-		if(x > 170){
-			do Screen.setColor(false);
-			do Screen.drawRectangle(x, y, x+l, y+h);
-			let x = x - 85;
-			do Screen.setColor(true);
-			do Screen.drawRectangle(x, y, x+l, y+h);
-		}
-		return;
-	}
-	method void move1right(){
-		if(x < 170){
-			do Screen.setColor(false);
-			do Screen.drawRectangle(x, y, x+l, y+h);
-			let x = x + 85;
-			do Screen.setColor(true);
-			do Screen.drawRectangle(x, y, x+l, y+h);
-		}
-		return;
-	}
-	method void move2left(){
-		if(x > 341){
-			do Screen.setColor(false);
-			do Screen.drawRectangle(x, y, x+l, y+h);
-			let x = x - 85;
-			do Screen.setColor(true);
-			do Screen.drawRectangle(x, y, x+l, y+h);
-		}
-		return;
-	}
-	method void move2right(){
-		if(x < 341){
-			do Screen.setColor(false);
-			do Screen.drawRectangle(x, y, x+l, y+h);
-			let x = x + 85;
-			do Screen.setColor(true);
-			do Screen.drawRectangle(x, y, x+l, y+h);
-		}
-		return;
-	}
+class Cargame{
+   field Car car1, car2;
+   field Circle c;
+   field Square s;
+   field int direction;
+   constructor Cargame new(){
+      let car1 = Car.new(114,204,26,34);
+      let car2 = Car.new(370,204,26,34);
+      let direction = 0;
+      return this;
+   }
+   method void dispose(){
+      do Memory.deAlloc(this);
+      return;
+   }
+   method void movecar(){
+      if(direction = 1){
+         do car1.move1left();
+      }
+      if(direction = 2){
+         do car1.move1right();
+      }
+      if(direction = 3){
+         do car2.move2left();
+      }
+      if(direction = 4){
+         do car2.move2right();
+      }
+      do Sys.wait(5);
+      return;
+   }
+   method void run(){
+      var boolean exit;
+      var char key;
+
+      let exit = false;
+
+      do Screen.drawRectangle(0,0,85,255);
+      do Screen.drawRectangle(426,0,511,255);
+      do Screen.drawLine(255,255,255,0);
+      do Screen.drawLine(256,255,256,0);
+      do Screen.drawLine(170,255,170,0);
+      do Screen.drawLine(341,255,341,0);
+      while(~exit){
+         let key = Keyboard.keyPressed();
+         if(key = 65){
+            let direction = 1;
+            do movecar();
+         }
+         if(key = 68){
+            let direction = 2;
+            do movecar();
+         }
+         if(key = 74){
+            let direction = 3;
+            do movecar();
+         }
+         if(key = 76){
+            let direction = 4;
+            do movecar();
+         }
+         //do c.moveDown(50);
+      }
+      return;
+   }
 }
