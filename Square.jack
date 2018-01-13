@@ -24,18 +24,28 @@ class Square{
       	do Screen.drawRectangle(x, y, x + l, y + l);
       	return;
    	}
-   	method void moveDown() {
-      	if ((y + l) < 254) {
+   	method void moveDown(int second) {
+      	if (y < 236) {
          	do Screen.setColor(false);
-         	do Screen.drawRectangle(x, y, x + l, y + 1);
+         	do Screen.drawRectangle(x, y, x + l, y + l);
          	let y = y + 2;
          	do Screen.setColor(true);
-         	do Screen.drawRectangle(x, (y + l) - 1, x + l, y + l);
-      	}
-      	if ((y + l) > 254) {
+         	do Screen.drawRectangle(x, y, x + l, y + l);
          	do Screen.setColor(false);
-         	do Screen.drawRectangle(x, y, x + l, y + 1);
+         	do Screen.drawRectangle(x+2, y+2, x + l - 2, y + l - 2);
       	}
+      	if (y = 236) {
+         	do Screen.setColor(false);
+         	do Screen.drawRectangle(x, y, x + l, y + l);
+         	let y = y+1;
+      	}
+      	do Sys.wait(second);
       	return;
+   	}
+   	method int get_square_x(){
+   		return x;
+   	}
+   	method int get_square_y(){
+   		return y;
    	}
 }
