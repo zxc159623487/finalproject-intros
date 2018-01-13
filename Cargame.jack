@@ -6,6 +6,8 @@ class Cargame{
    constructor Cargame new(){
       let car1 = Car.new(114,204,26,34);
       let car2 = Car.new(370,204,26,34);
+      //let c = Circle.new(127,8,8);
+      //let s = Square.new(255,8,8);
       let direction = 0;
       return this;
    }
@@ -30,18 +32,19 @@ class Cargame{
       return;
    }
    method void run(){
-      var boolean exit;
+      var boolean exit1, exit2;
       var char key;
 
-      let exit = false;
-
+      let exit1 = false;
+      let exit2 = false;
       do Screen.drawRectangle(0,0,85,255);
       do Screen.drawRectangle(426,0,511,255);
       do Screen.drawLine(255,255,255,0);
       do Screen.drawLine(256,255,256,0);
       do Screen.drawLine(170,255,170,0);
       do Screen.drawLine(341,255,341,0);
-      while(~exit){
+      let s = Square.new(119,0,17);
+      while(~exit1 & ~exit2){
          let key = Keyboard.keyPressed();
          if(key = 65){
             let direction = 1;
@@ -59,8 +62,27 @@ class Cargame{
             let direction = 4;
             do movecar();
          }
-         //do c.moveDown(50);
+         do s.moveDown(50);
+         let exit1 =  compare(car1.get_car_x(),car1.get_car_y(),s.get_square_x(),s.get_square_y());
+         let exit2 =  compare(car2.get_car_x(),car2.get_car_y(),s.get_square_x(),s.get_square_y());
       }
+      do gameover();
       return;
+   }
+   method boolean compare(int x0,int y0,int x1,int y1){
+   		if(x1-x0=5){
+   			if(y1>187){
+   				if(y1<238){
+   					return true;
+   				}
+   			}
+   		}
+   		return false;
+   }
+   method void gameover(){
+   	do Screen.clearScreen();
+   	do Output.moveCursor(11,26);
+   	do Output.printString("Game Over");
+   	return;
    }
 }
