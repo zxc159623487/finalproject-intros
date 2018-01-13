@@ -3,6 +3,7 @@ class Cargame{
    field Circle c;
    field Square s;
    field int direction;
+   field int points;
    constructor Cargame new(){
       let car1 = Car.new(114,204,26,34);
       let car2 = Car.new(370,204,26,34);
@@ -34,7 +35,7 @@ class Cargame{
    method void run(){
       var boolean exit1, exit2;
       var char key;
-
+      let points = 0;
       let exit1 = false;
       let exit2 = false;
       do Screen.drawRectangle(0,0,85,255);
@@ -43,7 +44,9 @@ class Cargame{
       do Screen.drawLine(256,255,256,0);
       do Screen.drawLine(170,255,170,0);
       do Screen.drawLine(341,255,341,0);
+      do scoreboard();
       let s = Square.new(119,0,17);
+      let c = Circle.new(383,9,8);
       while(~exit1 & ~exit2){
          let key = Keyboard.keyPressed();
          if(key = 65){
@@ -62,17 +65,47 @@ class Cargame{
             let direction = 4;
             do movecar();
          }
+         if(compare2(car1.get_car_x(),car1.get_car_y(),c.get_circle_x(),c.get_circle_y()))
+         {
+         	let points = points + 1;
+         	do scoreboard();
+         }
+         if(compare2(car2.get_car_x(),car2.get_car_y(),c.get_circle_x(),c.get_circle_y()))
+         {
+         	let points = points + 1;
+         	do scoreboard();
+         }
          do s.moveDown(50);
+         do c.moveDown(50);
          let exit1 =  compare(car1.get_car_x(),car1.get_car_y(),s.get_square_x(),s.get_square_y());
          let exit2 =  compare(car2.get_car_x(),car2.get_car_y(),s.get_square_x(),s.get_square_y());
       }
       do gameover();
       return;
-   }
+   	}
+   	method void scoreboard(){
+   		do Screen.setColor(false);
+   		do Output.moveCursor(0,0);
+   		do Output.printInt(points);
+   		return;
+    }
    method boolean compare(int x0,int y0,int x1,int y1){
    		if(x1-x0=5){
    			if(y1>187){
-   				if(y1<238){
+   				if(y1<236){
+   					return true;
+   				}
+   			}
+   		}
+   		return false;
+   }
+   method boolean compare2(int x0,int y0,int x1,int y1){
+   		if(x1-x0=13){
+   			if(y1>196){
+   				if(y1<246){
+   					do c.disappear();
+   					do car1.drawcar();
+   					do car2.drawcar();
    					return true;
    				}
    			}
@@ -81,8 +114,10 @@ class Cargame{
    }
    method void gameover(){
    	do Screen.clearScreen();
-   	do Output.moveCursor(11,26);
+   	do Output.moveCursor(11,28);
    	do Output.printString("Game Over");
+   	do Output.moveCursor(15,32);
+   	do Output.printInt(points);
    	return;
    }
 }
