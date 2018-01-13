@@ -14,32 +14,22 @@ class Cargame{
 	}
 	method void movecar(){
 		if(direction = 1){
-			do car1.moveleft();
-			do Output.printInt(direction);
+			do car1.move1left();
 		}
 		if(direction = 2){
-			do car1.moveright();
-			do Output.printInt(direction);
+			do car1.move1right();
 		}
 		if(direction = 3){
-			do car2.moveleft();
-			do Output.printInt(direction);
+			do car2.move2left();
 		}
 		if(direction = 4){
-			do car2.moveright();
-			do Output.printInt(direction);
+			do car2.move2right();
 		}
 		do Sys.wait(5);
 		return;
 	}
 	method void run(){
 		var boolean exit;
-		var Car c1; 
-		var Car c2;
-		var Circle r1;
-		var Circle r2;
-		var Square s1;
-		var Square s2;
 		var char key;
 
 		let exit = false;
@@ -49,7 +39,8 @@ class Cargame{
 		do Screen.drawLine(127,255,127,0);
 		do Screen.drawLine(384,255,384,0);
 		while(~exit){
-			if(key = 131){
+			let key = Keyboard.keyPressed();
+			if(key = 65){
 				let direction = 1;
 				do movecar();
 			}
