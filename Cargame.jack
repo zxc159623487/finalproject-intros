@@ -1,0 +1,71 @@
+class Cargame{
+	field Car car1, car2;
+
+	field int direction;
+	constructor Cargame new(){
+		let car1 = Car.new(46,181,35,52);
+		let car2 = Car.new(429,181,35,52);
+		let direction = 0;
+		return this;
+	}
+	method void dispose(){
+		do Memory.deAlloc(this);
+		return;
+	}
+	method void movecar(){
+		if(direction = 1){
+			do car1.moveleft();
+			do Output.printInt(direction);
+		}
+		if(direction = 2){
+			do car1.moveright();
+			do Output.printInt(direction);
+		}
+		if(direction = 3){
+			do car2.moveleft();
+			do Output.printInt(direction);
+		}
+		if(direction = 4){
+			do car2.moveright();
+			do Output.printInt(direction);
+		}
+		do Sys.wait(5);
+		return;
+	}
+	method void run(){
+		var boolean exit;
+		var Car c1; 
+		var Car c2;
+		var Circle r1;
+		var Circle r2;
+		var Square s1;
+		var Square s2;
+		var char key;
+
+		let exit = false;
+
+		do Screen.drawLine(255,255,255,0);
+		do Screen.drawLine(256,255,256,0);
+		do Screen.drawLine(127,255,127,0);
+		do Screen.drawLine(384,255,384,0);
+		while(~exit){
+			if(key = 131){
+				let direction = 1;
+				do movecar();
+			}
+			if(key = 68){
+				let direction = 2;
+				do movecar();
+			}
+			if(key = 74){
+				let direction = 3;
+				do movecar();
+			}
+			if(key = 76){
+				let direction = 4;
+				do movecar();
+			}
+		}
+		return;
+	}
+}

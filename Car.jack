@@ -1,0 +1,52 @@
+class Car{
+	field int x;
+	field int y;
+	field int l;
+	field int h;
+	constructor Car new(int a, int b, int length, int height)
+	{
+		let x = a;
+		let y = b;
+		let l = length;
+		let h = height;
+		do drawcar();
+		return this;
+	}
+	method void dispose(){
+	do Memory.deAlloc(this);
+	return;
+	}
+	method void drawcar()
+	{
+		do Screen.setColor(true);
+		do Screen.drawRectangle(x, y, x+l, y+h);
+		return;
+	}
+	method void erasecar()
+	{
+		do Screen.setColor(false);
+		do Screen.drawRectangle(x, y, x+l, y+h);
+		return;
+	}
+	method void moveright(){
+		if(x+l<510){
+		do Screen.setColor(false);
+		do Screen.drawRectangle(x, y, x+l, y+h);
+		let x = x + 1;
+		do Screen.setColor(true);
+		do Screen.drawRectangle(x, y, x+l, y+h);
+		}
+		return;
+	}
+	method void moveleft(){
+		if(x>1){
+		do Screen.setColor(false);
+		do Screen.drawRectangle(x, y, x+l, y+h);
+		let x = x - 1;
+		do Screen.setColor(true);
+		do Screen.drawRectangle(x, y, x+l, y+h);
+		}
+		return;
+	}
+
+}

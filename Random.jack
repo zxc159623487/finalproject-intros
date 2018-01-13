@@ -1,0 +1,28 @@
+class Random {
+	static int x;
+
+	function void seed(int seed) {
+		let x = seed;
+		return;
+	}
+	function int mod(int a, int b) {
+		if (a < 0) {
+			let a = -a;
+		}
+
+		while ((a + 1) > b) {
+			let a = a - b;
+		}
+
+		return a;
+	}
+	function int next() {
+		let x = 7919 + (17*x);
+		return x;
+	}
+	function int between(int x, int y) {
+		var int diff;
+		let diff = y - x;
+		return Random.mod(Random.next(), diff) + x;
+	}
+}
