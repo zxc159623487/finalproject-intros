@@ -29,40 +29,40 @@ class Car{
 		return;
 	}
 	method void move1left(){
-		if(x > 127){
+		if(x > 170){
 			do Screen.setColor(false);
 			do Screen.drawRectangle(x, y, x+l, y+h);
-			let x = x - 127;
+			let x = x - 85;
 			do Screen.setColor(true);
 			do Screen.drawRectangle(x, y, x+l, y+h);
 		}
 		return;
 	}
 	method void move1right(){
-		if(x < 127){
+		if(x < 170){
 			do Screen.setColor(false);
 			do Screen.drawRectangle(x, y, x+l, y+h);
-			let x = x + 127;
+			let x = x + 85;
 			do Screen.setColor(true);
 			do Screen.drawRectangle(x, y, x+l, y+h);
 		}
 		return;
 	}
 	method void move2left(){
-		if(x > 384){
+		if(x > 341){
 			do Screen.setColor(false);
 			do Screen.drawRectangle(x, y, x+l, y+h);
-			let x = x - 127;
+			let x = x - 85;
 			do Screen.setColor(true);
 			do Screen.drawRectangle(x, y, x+l, y+h);
 		}
 		return;
 	}
 	method void move2right(){
-		if(x < 384){
+		if(x < 341){
 			do Screen.setColor(false);
 			do Screen.drawRectangle(x, y, x+l, y+h);
-			let x = x + 127;
+			let x = x + 85;
 			do Screen.setColor(true);
 			do Screen.drawRectangle(x, y, x+l, y+h);
 		}
