@@ -26,21 +26,29 @@ class Circle{
       	do Screen.drawCircle(x, y, r);
       	return;
    	}
+   	method void disappear() {
+      	do Screen.setColor(false);
+      	do Screen.drawCircle(x, y, r);
+      	let y = 247;
+      	return;
+   	}
    	method void moveDown(int second) {
-      	if ((y + r) < 240) {
+      	if ((y + r) < 255) {
          	do Screen.setColor(false);
          	do Screen.drawCircle(x, y, r);
          	let y = y + 2;
          	do Screen.setColor(true);
-         	do Screen.drawCircle(x, (y + r) - 1, r);
+         	do Screen.drawCircle(x, y , r);
          	do Screen.setColor(false);
-         	do Screen.drawCircle(x, (y + r) - 1, r-4);
-      	}
-      	if (y >240) {
-         	do Screen.setColor(false);
-         	do Screen.drawCircle(x, (y + r), r);
+         	do Screen.drawCircle(x, y, r-4);
       	}
       	do Sys.wait(second);
       	return;
+   	}
+   	method int get_circle_x(){
+   		return x;
+   	}
+   	method int get_circle_y(){
+   		return y;
    	}
 }
