@@ -1,14 +1,46 @@
 class Circle{
 	field int x;
 	field int y;
-	field int l;
-	field int h;
-	constructor Circle new(int a, int b, int length, int height)
+	field int r;
+	constructor Circle new(int a, int b, int radius)
 	{
 		let x = a;
 		let y = b;
-		let l = length;
-		let h = height;
+		let r = radius;
+		do drawcircle();
 		return this;
 	}
+	method void dispose() {
+    	do Memory.deAlloc(this);
+    	return;
+   	}
+   	method void drawcircle() {
+     	do Screen.setColor(true);
+      	do Screen.drawCircle(x, y, r);
+      	do Screen.setColor(false);
+      	do Screen.drawCircle(x, y, r-4);
+      	return;
+   	}
+   	method void erasecircle() {
+      	do Screen.setColor(false);
+      	do Screen.drawCircle(x, y, r);
+      	return;
+   	}
+   	method void moveDown(int second) {
+      	if ((y + r) < 240) {
+         	do Screen.setColor(false);
+         	do Screen.drawCircle(x, y, r);
+         	let y = y + 2;
+         	do Screen.setColor(true);
+         	do Screen.drawCircle(x, (y + r) - 1, r);
+         	do Screen.setColor(false);
+         	do Screen.drawCircle(x, (y + r) - 1, r-4);
+      	}
+      	if (y >240) {
+         	do Screen.setColor(false);
+         	do Screen.drawCircle(x, (y + r), r);
+      	}
+      	do Sys.wait(second);
+      	return;
+   	}
 }
