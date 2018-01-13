@@ -1,61 +1,70 @@
-class Cargame{
-	field Car car1, car2;
-
-	field int direction;
-	constructor Cargame new(){
-		let car1 = Car.new(46,181,35,52);
-		let car2 = Car.new(429,181,35,52);
-		let direction = 0;
+class Car{
+	field int x;
+	field int y;
+	field int l;
+	field int h;
+	constructor Car new(int a, int b, int length, int height)
+	{
+		let x = a;
+		let y = b;
+		let l = length;
+		let h = height;
+		do drawcar();
 		return this;
 	}
 	method void dispose(){
 		do Memory.deAlloc(this);
 		return;
 	}
-	method void movecar(){
-		if(direction = 1){
-			do car1.move1left();
-		}
-		if(direction = 2){
-			do car1.move1right();
-		}
-		if(direction = 3){
-			do car2.move2left();
-		}
-		if(direction = 4){
-			do car2.move2right();
-		}
-		do Sys.wait(5);
+	method void drawcar()
+	{
+		do Screen.setColor(true);
+		do Screen.drawRectangle(x, y, x+l, y+h);
 		return;
 	}
-	method void run(){
-		var boolean exit;
-		var char key;
-
-		let exit = false;
-
-		do Screen.drawLine(255,255,255,0);
-		do Screen.drawLine(256,255,256,0);
-		do Screen.drawLine(127,255,127,0);
-		do Screen.drawLine(384,255,384,0);
-		while(~exit){
-			let key = Keyboard.keyPressed();
-			if(key = 65){
-				let direction = 1;
-				do movecar();
-			}
-			if(key = 68){
-				let direction = 2;
-				do movecar();
-			}
-			if(key = 74){
-				let direction = 3;
-				do movecar();
-			}
-			if(key = 76){
-				let direction = 4;
-				do movecar();
-			}
+	method void erasecar()
+	{
+		do Screen.setColor(false);
+		do Screen.drawRectangle(x, y, x+l, y+h);
+		return;
+	}
+	method void move1left(){
+		if(x > 170){
+			do Screen.setColor(false);
+			do Screen.drawRectangle(x, y, x+l, y+h);
+			let x = x - 85;
+			do Screen.setColor(true);
+			do Screen.drawRectangle(x, y, x+l, y+h);
+		}
+		return;
+	}
+	method void move1right(){
+		if(x < 170){
+			do Screen.setColor(false);
+			do Screen.drawRectangle(x, y, x+l, y+h);
+			let x = x + 85;
+			do Screen.setColor(true);
+			do Screen.drawRectangle(x, y, x+l, y+h);
+		}
+		return;
+	}
+	method void move2left(){
+		if(x > 341){
+			do Screen.setColor(false);
+			do Screen.drawRectangle(x, y, x+l, y+h);
+			let x = x - 85;
+			do Screen.setColor(true);
+			do Screen.drawRectangle(x, y, x+l, y+h);
+		}
+		return;
+	}
+	method void move2right(){
+		if(x < 341){
+			do Screen.setColor(false);
+			do Screen.drawRectangle(x, y, x+l, y+h);
+			let x = x + 85;
+			do Screen.setColor(true);
+			do Screen.drawRectangle(x, y, x+l, y+h);
 		}
 		return;
 	}
