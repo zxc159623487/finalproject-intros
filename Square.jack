@@ -2,13 +2,40 @@ class Square{
 	field int x;
 	field int y;
 	field int l;
-	field int h;
-	constructor Square new(int a, int b, int length, int height)
+	constructor Square new(int a, int b, int length)
 	{
 		let x = a;
 		let y = b;
 		let l = length;
-		let h = height;
+		do drawsquare();
 		return this;
 	}
+	method void dispose() {
+    	do Memory.deAlloc(this);
+    	return;
+   	}
+   	method void drawsquare() {
+     	do Screen.setColor(true);
+      	do Screen.drawRectangle(x, y, x + l, y + l);
+      	return;
+   	}
+   	method void erasesquare() {
+      	do Screen.setColor(false);
+      	do Screen.drawRectangle(x, y, x + l, y + l);
+      	return;
+   	}
+   	method void moveDown() {
+      	if ((y + l) < 254) {
+         	do Screen.setColor(false);
+         	do Screen.drawRectangle(x, y, x + l, y + 1);
+         	let y = y + 2;
+         	do Screen.setColor(true);
+         	do Screen.drawRectangle(x, (y + l) - 1, x + l, y + l);
+      	}
+      	if ((y + l) > 254) {
+         	do Screen.setColor(false);
+         	do Screen.drawRectangle(x, y, x + l, y + 1);
+      	}
+      	return;
+   	}
 }
