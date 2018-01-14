@@ -1,111 +1,209 @@
 class Cargame{
-   field Car car1, car2;
-   field Circle c;
-   field Square s;
-   field int direction;
-   field int points;
-   constructor Cargame new(){
-      let car1 = Car.new(114,204,26,34);
-      let car2 = Car.new(370,204,26,34);
-      //let c = Circle.new(127,8,8);
-      //let s = Square.new(255,8,8);
-      let direction = 0;
-      return this;
-   }
-   method void dispose(){
-      do Memory.deAlloc(this);
-      return;
-   }
-   method void movecar(){
-      if(direction = 1){
-         do car1.move1left();
-      }
-      if(direction = 2){
-         do car1.move1right();
-      }
-      if(direction = 3){
-         do car2.move2left();
-      }
-      if(direction = 4){
-         do car2.move2right();
-      }
-      do Sys.wait(5);
-      return;
-   }
-   method void run(){
-      var boolean exit1, exit2;
-      var char key;
-      let points = 0;
-      let exit1 = false;
-      let exit2 = false;
-      do Screen.drawRectangle(0,0,85,255);
-      do Screen.drawRectangle(426,0,511,255);
-      do Screen.drawLine(255,255,255,0);
-      do Screen.drawLine(256,255,256,0);
-      do Screen.drawLine(170,255,170,0);
-      do Screen.drawLine(341,255,341,0);
-      do scoreboard();
-      let s = Square.new(119,0,17);
-      let c = Circle.new(383,9,8);
-      while(~exit1 & ~exit2){
-         let key = Keyboard.keyPressed();
-         if(key = 65){
-            let direction = 1;
-            do movecar();
-         }
-         if(key = 68){
-            let direction = 2;
-            do movecar();
-         }
-         if(key = 74){
-            let direction = 3;
-            do movecar();
-         }
-         if(key = 76){
-            let direction = 4;
-            do movecar();
-         }
-         if(compare2(car1.get_car_x(),car1.get_car_y(),c.get_circle_x(),c.get_circle_y()))
-         {
-         	let points = points + 1;
-         	do scoreboard();
-         }
-         if(compare2(car2.get_car_x(),car2.get_car_y(),c.get_circle_x(),c.get_circle_y()))
-         {
-         	let points = points + 1;
-         	do scoreboard();
-         }
-         do s.moveDown(50);
-         do c.moveDown(50);
-         let exit1 =  compare(car1.get_car_x(),car1.get_car_y(),s.get_square_x(),s.get_square_y());
-         let exit2 =  compare(car2.get_car_x(),car2.get_car_y(),s.get_square_x(),s.get_square_y());
-      }
-      do gameover();
-      return;
-   	}
-   	method void scoreboard(){
+	field Car car1, car2;
+	field Circle c1, c2;
+	field Square s1, s2;
+	field int points;
+	field int direction;
+	constructor Cargame new(){
+		let car1 = Car.new(114,204,26,34);
+      	let car2 = Car.new(370,204,26,34);
+		let direction = 0;
+		return this;
+	}
+	method void dispose(){
+		do Memory.deAlloc(this);
+		return;
+	}
+	method void movecar(){
+		if(direction = 1){
+			do car1.move1left();
+		}
+		if(direction = 2){
+			do car1.move1right();
+		}
+		if(direction = 3){
+			do car2.move2left();
+		}
+		if(direction = 4){
+			do car2.move2right();
+		}
+		do Sys.wait(5);
+		return;
+	}
+	method void appear(int side, int x){
+		if(side = 0){
+			if(x = 0){
+				let c1 = Circle.new(127, 10, 8);
+			}
+			if(x = 1){
+				let c1 = Circle.new(127 + 85, 10, 8);
+			}
+			if(x = 2){
+				let s1 = Square.new(119, 2, 17);
+			}
+			if(x = 3){
+				let s1 = Square.new(119 + 85, 2, 17);
+			}
+		}
+		if(side = 1){
+			if(x = 0){
+				let c2 = Circle.new(298, 10, 8);
+			}
+			if(x = 1){
+				let c2 = Circle.new(298 + 85, 10, 8);
+			}
+			if(x = 2){
+				let s2 = Square.new(290, 2, 17);
+			}
+			if(x = 3){
+				let s2 = Square.new(290 + 85, 2, 17);
+			}
+		}
+		return;
+	}
+	method void run(){
+		var boolean exit1, exit2, exit3, exit4;
+		var int pressleft, pressright;
+		var char key;
+		var int t, x;
+		var int c1ex, c2ex, s1ex, s2ex;
+		let c1ex = 0;
+		let c2ex = 0;
+		let s1ex = 0;
+		let s2ex = 0;
+		let exit1 = false;
+      	let exit2 = false;
+      	let exit3 = false;
+      	let exit4 = false;
+      	let pressleft = 0;
+      	let pressright = 0;
+		let t = 0;
+		do Screen.drawRectangle(0,0,85,255);
+      	do Screen.drawRectangle(426,0,511,255);
+      	do Screen.drawLine(255,255,255,0);
+      	do Screen.drawLine(256,255,256,0);
+      	do Screen.drawLine(170,255,170,0);
+     	do Screen.drawLine(341,255,341,0);
+		while(~exit1 & ~exit2 & ~exit3 & ~exit4){
+			/*appear circle and square*/
+			if((c1ex = 0) & (s1ex = 0) & (c2ex = 0) & (s2ex = 0)){
+				let x = Random.between(0,4);
+				if((x = 0) | (x = 1)){let c1ex = 1;}
+				if((x = 2) | (x = 3)){let s1ex = 1;}
+				do appear(0, x);
+				let x = Random.between(0,4);
+				let x = Random.between(0,4);
+				if((x = 0) | (x = 1)){let c2ex = 1;}
+				if((x = 2) | (x = 3)){let s2ex = 1;}
+				do appear(1, x);
+			}
+			/*move object*/
+			if(c1ex = 1){do c1.moveDown(3);}
+			if(c2ex = 1){do c2.moveDown(3);}
+			if(s1ex = 1){do s1.moveDown(3);}
+			if(s2ex = 1){do s2.moveDown(3);}
+			/*move car*/
+			let key = Keyboard.keyPressed();
+			/*if(key = 65){
+				let direction = 1;
+				do movecar();
+			}*/
+			if(~(key = 70)){
+				let pressleft = 0;
+			}
+			if((key = 70) & (pressleft = 0)){
+				if(car1.get_car_x() = 199){let direction = 1;}
+				if(car1.get_car_x() = 114){let direction = 2;}
+				let pressleft = 1;
+				do movecar();
+			}
+			if(~(key = 74)){
+				let pressright = 0;
+			}
+			if((key = 74) & (pressright = 0)){
+				if(car2.get_car_x() = 370){let direction = 3;}
+				if(car2.get_car_x() = 285){let direction = 4;}
+				let pressright = 1;
+				do movecar();
+			}
+			/*if(key = 76){
+				let direction = 4;
+				do movecar();
+			}*/
+			if(c1ex = 1){
+				if(compare2(car1.get_car_x(),car1.get_car_y(),c1.get_circle_x(),c1.get_circle_y(), c1)){
+         			do c1.disappear();
+   					do c1.dispose();
+   					let c1ex = 0;
+   					do car1.drawcar();
+   					do car2.drawcar();
+         			let points = points + 1;
+         			do scoreboard();
+         		}
+         		if(c1.get_circle_y() = 246){
+         			let exit3 = 1;
+         			do c1.dispose();
+         			let c1ex = 0;
+         		}
+			}
+			if(c2ex = 1){
+				if(compare2(car2.get_car_x(),car2.get_car_y(),c2.get_circle_x(),c2.get_circle_y(), c2)){
+ 		 			do c2.disappear();
+   					do c2.dispose();
+   					let c2ex = 0;
+   					do car1.drawcar();
+   					do car2.drawcar();
+ 		 			let points = points + 1;
+         			do scoreboard();
+        		}
+        		if(c2.get_circle_y() = 246){
+         			let exit4 = 1;
+         			do c2.dispose();
+         			let c2ex = 0;
+         		}
+			}
+			if(s1ex = 1){
+				if (s1.get_square_y() = 234) {
+         			do Screen.setColor(false);
+         			do Screen.drawRectangle(s1.get_square_x() , 234, s1.get_square_x() + 17, 234 + 17);
+         			do s1.dispose();
+         			let s1ex = 0;
+         		}
+				let exit1 =  compare(car1.get_car_x(),car1.get_car_y(),s1.get_square_x(),s1.get_square_y());
+			}
+			if(s2ex = 1){
+				if (s2.get_square_y() = 234) {
+         			do Screen.setColor(false);
+         			do Screen.drawRectangle(s2.get_square_x() , 234, s2.get_square_x() + 17, 234 + 17);
+         			do s2.dispose();
+         			let s2ex = 0;
+         		}
+				let exit2 =  compare(car2.get_car_x(),car2.get_car_y(),s2.get_square_x(),s2.get_square_y());
+			}
+		}
+		do gameover();
+      	return;
+	}
+	method void scoreboard(){
    		do Screen.setColor(false);
    		do Output.moveCursor(0,0);
    		do Output.printInt(points);
    		return;
     }
-   method boolean compare(int x0,int y0,int x1,int y1){
+	method boolean compare(int x0,int y0,int x1,int y1){
    		if(x1-x0=5){
    			if(y1>187){
-   				if(y1<236){
+   				if(y1<238){
    					return true;
    				}
    			}
    		}
    		return false;
    }
-   method boolean compare2(int x0,int y0,int x1,int y1){
+   method boolean compare2(int x0,int y0,int x1,int y1, Circle c){
    		if(x1-x0=13){
    			if(y1>196){
    				if(y1<246){
-   					do c.disappear();
-   					do car1.drawcar();
-   					do car2.drawcar();
    					return true;
    				}
    			}
@@ -114,7 +212,7 @@ class Cargame{
    }
    method void gameover(){
    	do Screen.clearScreen();
-   	do Output.moveCursor(11,28);
+   	do Output.moveCursor(11,26);
    	do Output.printString("Game Over");
    	do Output.moveCursor(15,32);
    	do Output.printInt(points);
