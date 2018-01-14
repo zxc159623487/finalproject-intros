@@ -34,11 +34,11 @@ class Square{
          	do Screen.setColor(false);
          	do Screen.drawRectangle(x+2, y+2, x + l - 2, y + l - 2);
       	}
-      	if (y = 236) {
+      	/*if (y = 236) {
          	do Screen.setColor(false);
          	do Screen.drawRectangle(x, y, x + l, y + l);
          	let y = y+1;
-      	}
+      	}*/
       	do Sys.wait(second);
       	return;
    	}

@@ -1,11 +1,9 @@
 class Main{
 	function void main(){
 		var Cargame game;
-
 		let game = Cargame.new();
 		do game.run();
 		do game.dispose();
-
 		return;
 	}
 }
