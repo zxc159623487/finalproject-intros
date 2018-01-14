@@ -18,8 +18,44 @@ class Car{
 	}
 	method void drawcar()
 	{
-		do Screen.setColor(true);
-		do Screen.drawRectangle(x, y, x+l, y+h);
+		//head
+		do Screen.drawLine(x,y,x+13,y-3);
+		do Screen.drawLine(x+13,y-3,x+26,y);
+		//light
+		do Screen.drawLine(x+3,y+2,x+7,y+1);
+		do Screen.drawLine(x+23,y+2,x+19,y+1);
+		do Screen.drawLine(x+3,y+6,x+7,y+5);
+		do Screen.drawLine(x+23,y+6,x+19,y+5);
+		do Screen.drawLine(x+2,y+6,x+3,y+2);
+		do Screen.drawLine(x+24,y+6,x+23,y+2);
+		do Screen.drawLine(x+7,y+1,x+6,y+5);
+		do Screen.drawLine(x+19,y+1,x+20,y+5);
+		//side
+		do Screen.drawLine(x,y,x-3,y+6);
+		do Screen.drawLine(x-3,y+6,x,y+13);
+		do Screen.drawLine(x+26,y,x+29,y+6);
+		do Screen.drawLine(x+29,y+6,x+26,y+13);
+		do Screen.drawLine(x,y+13,x,y+21);
+		do Screen.drawLine(x+26,y+13,x+26,y+21);
+		do Screen.drawLine(x,y+21,x-2,y+28);
+		do Screen.drawLine(x-2,y+28,x+2,y+34);
+		do Screen.drawLine(x+26,y+21,x+28,y+28);
+		do Screen.drawLine(x+28,y+28,x+24,y+34);
+		do Screen.drawLine(x+2,y+34,x+24,y+34);
+		//shield front
+		do Screen.drawLine(x+4,y+8,x+13,y+6);
+		do Screen.drawLine(x+22,y+8,x+13,y+6);
+		do Screen.drawLine(x+4,y+8,x+6,y+14);
+		do Screen.drawLine(x+22,y+8,x+20,y+14);
+		do Screen.drawLine(x+6,y+14,x+20,y+14);
+		//shield back
+		do Screen.drawLine(x+7,y+28,x+11,y+31);
+		do Screen.drawLine(x+19,y+28,x+15,y+31);
+		do Screen.drawLine(x+11,y+31,x+15,y+31);
+		do Screen.drawLine(x+7,y+28,x+7,y+23);
+		do Screen.drawLine(x+19,y+28,x+19,y+23);
+		do Screen.drawLine(x+7,y+23,x+19,y+23);
+
 		return;
 	}
 	method void erasecar()
@@ -28,44 +64,40 @@ class Car{
 		do Screen.drawRectangle(x, y, x+l, y+h);
 		return;
 	}
-	method void move1left(){
-		if(x > 170){
-			do Screen.setColor(false);
-			do Screen.drawRectangle(x, y, x+l, y+h);
-			let x = x - 85;
-			do Screen.setColor(true);
-			do Screen.drawRectangle(x, y, x+l, y+h);
-		}
-		return;
-	}
 	method void move1right(){
 		if(x < 170){
 			do Screen.setColor(false);
-			do Screen.drawRectangle(x, y, x+l, y+h);
+			do Screen.drawRectangle(x-3, y-3, x+29, y+34);
 			let x = x + 85;
 			do Screen.setColor(true);
-			do Screen.drawRectangle(x, y, x+l, y+h);
+			do drawcar();
 		}
 		return;
 	}
 	method void move2left(){
 		if(x > 341){
 			do Screen.setColor(false);
-			do Screen.drawRectangle(x, y, x+l, y+h);
+			do Screen.drawRectangle(x-3, y-3, x+29, y+34);
 			let x = x - 85;
 			do Screen.setColor(true);
-			do Screen.drawRectangle(x, y, x+l, y+h);
+			do drawcar();
 		}
 		return;
 	}
 	method void move2right(){
 		if(x < 341){
 			do Screen.setColor(false);
-			do Screen.drawRectangle(x, y, x+l, y+h);
+			do Screen.drawRectangle(x-3, y-3, x+29, y+34);
 			let x = x + 85;
 			do Screen.setColor(true);
-			do Screen.drawRectangle(x, y, x+l, y+h);
+			do drawcar();
 		}
 		return;
+	}
+	method int get_car_x(){
+		return x;
+	}
+	method int get_car_y(){
+		return y;
 	}
 }
