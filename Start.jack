@@ -1,0 +1,84 @@
+class Start{
+	constructor Start new(int a)
+	{
+		do drawstart();
+		return this;
+	}
+	method void drawstart(){
+		do Screen.setColor(true);
+		//2
+		do Screen.drawLine(96,50,106,36);
+		do Screen.drawLine(106,36,149,36);
+		do Screen.drawLine(96,50,126,50);
+		do Screen.drawLine(149,36,151,39);
+		do Screen.drawLine(151,39,151,55);
+		do Screen.drawLine(126,55,126,50);
+		do Screen.drawLine(126,55,81,100);
+		do Screen.drawLine(81,100,151,100);
+		do Screen.drawLine(151,100,166,87);
+		do Screen.drawLine(166,87,117,87);
+		do Screen.drawLine(117,87,151,55);
+		//c
+		do Screen.drawLine(171,41,171,90);
+		do Screen.drawLine(186,50,221,50);
+		do Screen.drawLine(221,50,216,36);
+		do Screen.drawLine(216,36,174,36);
+		do Screen.drawLine(171,41,174,36);
+
+		//do Screen.drawLine(171,55,171,90);
+		do Screen.drawLine(171,90,181,100);
+		do Screen.drawLine(181,100,211,100);
+		do Screen.drawLine(211,100,221,85);
+		do Screen.drawLine(221,85,186,85);
+		do Screen.drawLine(186,85,186,50);
+		//do Screen.drawLine(186,55,171,55);
+		//a
+		do Screen.drawLine(221,100,261,40);
+		do Screen.drawLine(261,40,281,40);
+		do Screen.drawLine(281,40,281,65);
+		do Screen.drawLine(266,65,281,65);
+		do Screen.drawLine(266,65,266,50);
+		do Screen.drawLine(266,50,253,71);
+		do Screen.drawLine(253,71,281,71);
+		do Screen.drawLine(281,71,281,100);
+		do Screen.drawLine(281,100,266,100);
+		do Screen.drawLine(266,100,266,80);
+		do Screen.drawLine(266,80,250,80);
+		do Screen.drawLine(250,80,236,100);
+		do Screen.drawLine(236,100,221,100);
+		//r
+		do Screen.drawLine(291,40,336,40);
+		do Screen.drawLine(336,40,346,50);
+		do Screen.drawLine(346,50,346,70);
+		do Screen.drawLine(346,70,336,80);
+		do Screen.drawLine(336,80,351,100);
+		do Screen.drawLine(351,100,331,100);
+		do Screen.drawLine(331,100,316,80);
+		do Screen.drawLine(316,80,306,80);
+		do Screen.drawLine(306,80,306,100);
+		do Screen.drawLine(306,100,291,100);
+		do Screen.drawLine(291,100,291,65);
+		do Screen.drawLine(291,65,306,65);
+		do Screen.drawLine(306,65,306,70);
+		do Screen.drawLine(306,70,331,70);
+		do Screen.drawLine(331,70,331,55);
+		do Screen.drawLine(331,55,291,55);
+		do Screen.drawLine(291,55,291,40);
+		//s
+		do Screen.drawLine(361,58,364,55);
+		do Screen.drawLine(364,55,384,55);
+		do Screen.drawLine(384,55,391,64);
+		do Screen.drawLine(391,64,376,64);
+		do Screen.drawLine(361,69,361,58);
+		do Screen.drawLine(376,69,376,64);
+		do Screen.drawLine(376,69,396,90);
+		do Screen.drawLine(396,90,389,100);
+		do Screen.drawLine(389,100,368,100);
+		do Screen.drawLine(368,100,361,90);
+		do Screen.drawLine(361,90,381,90);
+		do Screen.drawLine(381,90,361,69);
+		return;
+
+		return;
+	}
+}
