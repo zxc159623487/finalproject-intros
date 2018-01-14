@@ -64,6 +64,16 @@ class Car{
 		do Screen.drawRectangle(x, y, x+l, y+h);
 		return;
 	}
+	method void move1left(){
+		if(x > 170){
+			do Screen.setColor(false);
+			do Screen.drawRectangle(x-3, y-3, x+29, y+34);
+			let x = x - 85;
+			do Screen.setColor(true);
+			do drawcar();
+		}
+		return;
+	}
 	method void move1right(){
 		if(x < 170){
 			do Screen.setColor(false);
