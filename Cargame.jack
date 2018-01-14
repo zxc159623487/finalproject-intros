@@ -8,6 +8,7 @@ class Cargame{
 		let car1 = Car.new(114,204,26,34);
       	let car2 = Car.new(370,204,26,34);
 		let direction = 0;
+		let points = 0;
 		return this;
 	}
 	method void dispose(){
@@ -65,7 +66,7 @@ class Cargame{
 		var boolean exit1, exit2, exit3, exit4;
 		var int pressleft, pressright;
 		var char key;
-		var int t, x;
+		var int  x;
 		var int c1ex, c2ex, s1ex, s2ex;
 		let c1ex = 0;
 		let c2ex = 0;
@@ -77,15 +78,20 @@ class Cargame{
       	let exit4 = false;
       	let pressleft = 0;
       	let pressright = 0;
-		let t = 0;
 		do Screen.drawRectangle(0,0,85,255);
       	do Screen.drawRectangle(426,0,511,255);
       	do Screen.drawLine(255,255,255,0);
       	do Screen.drawLine(256,255,256,0);
       	do Screen.drawLine(170,255,170,0);
      	do Screen.drawLine(341,255,341,0);
+     	do Sys.wait(1000);//wait to start
 		while(~exit1 & ~exit2 & ~exit3 & ~exit4){
 			/*appear circle and square*/
+			if(points = 75){
+				do win();
+				return;
+			}
+			if((points / 15) * 15 = points){do level();}
 			if((c1ex = 0) & (s1ex = 0) & (c2ex = 0) & (s2ex = 0)){
 				let x = Random.between(0,4);
 				if((x = 0) | (x = 1)){let c1ex = 1;}
@@ -98,16 +104,12 @@ class Cargame{
 				do appear(1, x);
 			}
 			/*move object*/
-			if(c1ex = 1){do c1.moveDown(3);}
-			if(c2ex = 1){do c2.moveDown(3);}
-			if(s1ex = 1){do s1.moveDown(3);}
-			if(s2ex = 1){do s2.moveDown(3);}
+			if(c1ex = 1){do c1.moveDown(5 - (points / 15));}
+			if(c2ex = 1){do c2.moveDown(5 - (points / 15));}
+			if(s1ex = 1){do s1.moveDown(5 - (points / 15));}
+			if(s2ex = 1){do s2.moveDown(5 - (points / 15));}
 			/*move car*/
 			let key = Keyboard.keyPressed();
-			/*if(key = 65){
-				let direction = 1;
-				do movecar();
-			}*/
 			if(~(key = 70)){
 				let pressleft = 0;
 			}
@@ -126,10 +128,6 @@ class Cargame{
 				let pressright = 1;
 				do movecar();
 			}
-			/*if(key = 76){
-				let direction = 4;
-				do movecar();
-			}*/
 			if(c1ex = 1){
 				if(compare2(car1.get_car_x(),car1.get_car_y(),c1.get_circle_x(),c1.get_circle_y(), c1)){
          			do c1.disappear();
@@ -181,6 +179,7 @@ class Cargame{
 				let exit2 =  compare(car2.get_car_x(),car2.get_car_y(),s2.get_square_x(),s2.get_square_y());
 			}
 		}
+		do Sys.wait(1500);
 		do gameover();
       	return;
 	}
@@ -188,6 +187,13 @@ class Cargame{
    		do Screen.setColor(false);
    		do Output.moveCursor(0,0);
    		do Output.printInt(points);
+   		return;
+    }
+    method void level(){
+    	do Screen.setColor(false);
+    	do Output.moveCursor(0,55);
+    	do Output.printString("Level ");
+   		do Output.printInt((points / 15) + 1);
    		return;
     }
 	method boolean compare(int x0,int y0,int x1,int y1){
@@ -212,9 +218,19 @@ class Cargame{
    }
    method void gameover(){
    	do Screen.clearScreen();
-   	do Output.moveCursor(11,26);
+   	do Output.moveCursor(10,26);
    	do Output.printString("Game Over");
-   	do Output.moveCursor(15,32);
+   	do Output.moveCursor(12,26);
+   	do Output.printString("Score: ");
+   	do Output.printInt(points);
+   	return;
+   }
+   method void win(){
+   	do Screen.clearScreen();
+   	do Output.moveCursor(10,26);
+   	do Output.printString("You Win");
+   	do Output.moveCursor(12,26);
+   	do Output.printString("Score: ");
    	do Output.printInt(points);
    	return;
    }

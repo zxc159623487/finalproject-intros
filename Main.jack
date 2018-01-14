@@ -1,7 +1,18 @@
 class Main{
 	function void main(){
 		var Cargame game;
-		let game = Cargame.new();
+		var int key;
+		do Output.moveCursor(15,20);
+		do Output.printString("Press F to Move Left  Car");
+		do Output.moveCursor(17,20);
+		do Output.printString("Press J to Move Right Car");
+		let key = 0;
+		while(key = 0){
+			let key = Keyboard.keyPressed();
+		}
+		do Screen.setColor(false);
+      	do Screen.drawRectangle(0, 0, 511, 255);
+      	let game = Cargame.new();
 		do game.run();
 		do game.dispose();
 		return;
