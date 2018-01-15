@@ -181,6 +181,10 @@ class Cargame{
 		}
 		do Sys.wait(1500);
 		do gameover();
+		let key = 0;
+		while(key = 0){
+			let key = Keyboard.keyPressed();
+		}
       	return;
 	}
 	method void scoreboard(){
